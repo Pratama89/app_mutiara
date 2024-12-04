@@ -1,24 +1,34 @@
 import { NextResponse } from "next/server";
 import { registerUser } from "../../lib/userController";
+ // Import fungsi dari userController
 
 export async function POST(req) {
   try {
-    const { username, email, password } = await req.json();
+    // Parsing body dari request
+    const body = await req.json();
+    const { fullName, username, email, password } = body;
+    console.log("Data diterima dari frontend:", body);
 
     // Validasi input
-    if (!username || !email || !password) {
+    if (!fullName || !username || !email || !password) {
       return NextResponse.json(
-        { message: "Semua kolom harus diisi!" },
+        { message: "Semua kolom wajib diisi!" },
         { status: 400 }
       );
     }
 
-    // Panggil fungsi untuk menyimpan user
-    const userId = await registerUser(username, email, password);
-    return NextResponse.json({ message: "User berhasil didaftarkan!", userId });
+    // Daftarkan user menggunakan fungsi modular
+    const user = await registerUser({ fullName, username, email, password });
+
+    // Kirim respons sukses
+    return NextResponse.json({
+      message: "Pendaftaran berhasil!",
+      user,
+    });
   } catch (error) {
+    console.error("Error di API register:", error.message);
     return NextResponse.json(
-      { message: "Gagal mendaftarkan user: " + error.message },
+      { message: error.message || "Terjadi kesalahan saat registrasi." },
       { status: 500 }
     );
   }
