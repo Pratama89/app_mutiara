@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import Header from "../../components/header/page";
 import Menu from "../../components/menu/page";
 import Content from "../../components/content/page";
+import Image from "next/image";
+
 
 export default function Dashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
@@ -49,10 +51,32 @@ export default function Dashboard() {
   if (isAuthenticated === null) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
-        <p className="text-gray-600">Memeriksa autentikasi...</p>
+        {/* Logo dan Animasi */}
+        <div className="flex flex-col items-center">
+          <Image
+            src="/Icon Mutiara serang.png"
+            alt="Logo Mutiara Serang"
+            width={100}
+            height={100}
+            className="w-20 h-20 mb-4 animate-bounce"
+          />
+          <p className="text-gray-500 text-xl">Memeriksa autentikasi...</p>
+        </div>
       </div>
     );
   }
+
+  // if (isAuthenticated === null) {
+  //   return (
+  //     <div className="flex items-center justify-center min-h-screen bg-gray-100">
+  //       <div className="flex flex-col items-center">
+  //         <Lottie animationData={loadingAnimation} style={{ width: 150, height: 150 }} />
+  //         <p className="mt-4 text-blue-500 text-sm">Memeriksa autentikasi...</p>
+  //       </div>
+  //     </div>
+  //   );
+  // }
+  
 
   return (
     <div className="min-h-screen flex flex-col">
