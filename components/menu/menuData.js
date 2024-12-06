@@ -1,15 +1,17 @@
 import { FiHome, FiBriefcase, FiBook, FiDollarSign, FiSettings, FiClipboard } from "react-icons/fi";
 
 export const menuData = [
+  
   {
     name: "Dashboard",
     icon: <FiHome className="text-gray-600" />,
-    path: "/dashboard",
+    path: "/dashboard", // Tambahkan path untuk navigasi
     subMenu: [],
   },
   {
     name: "Perusahaan",
     icon: <FiBriefcase className="text-gray-600" />,
+    path: "", // Biarkan kosong jika tidak ada navigasi langsung
     subMenu: [
       { name: "Konsumen", path: "/dashboard/konsumen" },
       { name: "Pemasok", path: "/dashboard/pemasok" },
@@ -19,6 +21,7 @@ export const menuData = [
   {
     name: "Buku Besar",
     icon: <FiBook className="text-gray-600" />,
+    path: "", // Biarkan kosong jika tidak ada navigasi langsung
     subMenu: [
       { name: "Akun Perkiraan", path: "/dashboard/akun-perkiraan" },
       { name: "Pencatatan Gaji", path: "/dashboard/pencatatan-gaji" },
@@ -28,6 +31,7 @@ export const menuData = [
   {
     name: "Kas Bank",
     icon: <FiDollarSign className="text-gray-600" />,
+    path: "", // Biarkan kosong jika tidak ada navigasi langsung
     subMenu: [
       { name: "Pembayaran", path: "/dashboard/pembayaran" },
       { name: "Penerimaan", path: "/dashboard/penerimaan" },
@@ -38,6 +42,7 @@ export const menuData = [
   {
     name: "Penjualan",
     icon: <FiDollarSign className="text-gray-600" />,
+    path: "", // Biarkan kosong jika tidak ada navigasi langsung
     subMenu: [
       { name: "PO Penjualan", path: "/dashboard/po-penjualan" },
       { name: "Penjualan", path: "/dashboard/penjualan" },
@@ -47,6 +52,7 @@ export const menuData = [
   {
     name: "Pembelian",
     icon: <FiDollarSign className="text-gray-600" />,
+    path: "", // Biarkan kosong jika tidak ada navigasi langsung
     subMenu: [
       { name: "PO Pembelian", path: "/dashboard/po-pembelian" },
       { name: "Pembelian", path: "/dashboard/pembelian" },
@@ -56,6 +62,7 @@ export const menuData = [
   {
     name: "Persediaan",
     icon: <FiDollarSign className="text-gray-600" />,
+    path: "", // Biarkan kosong jika tidak ada navigasi langsung
     subMenu: [
       { name: "PO Persediaan", path: "/dashboard/po-persediaan" },
       { name: "Pemindahan Barang", path: "/dashboard/pemindahan-barang" },
@@ -67,6 +74,7 @@ export const menuData = [
   {
     name: "Aset Tetap",
     icon: <FiDollarSign className="text-gray-600" />,
+    path: "", // Biarkan kosong jika tidak ada navigasi langsung
     subMenu: [
       { name: "Aset Tetap", path: "/dashboard/aset-tetap" },
       { name: "Kategori Aset", path: "/dashboard/kategori-aset" },
@@ -75,6 +83,7 @@ export const menuData = [
   {
     name: "Pengaturan",
     icon: <FiSettings className="text-gray-600" />,
+    path: "", // Biarkan kosong jika tidak ada navigasi langsung
     subMenu: [
       { name: "Akses Group", path: "/dashboard/akses-group" },
       { name: "Pengaturan Pengguna", path: "/dashboard/pengaturan-pengguna" },
@@ -83,6 +92,7 @@ export const menuData = [
   {
     name: "Laporan",
     icon: <FiClipboard className="text-gray-600" />,
+    path: "", // Biarkan kosong jika tidak ada navigasi langsung
     subMenu: [
       { name: "Rekap Konsumen", path: "/dashboard/rekap-konsumen" },
       { name: "Rekap Pemasok", path: "/dashboard/rekap-pemasok" },

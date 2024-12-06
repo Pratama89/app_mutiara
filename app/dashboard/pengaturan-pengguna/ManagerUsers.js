@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-export default function ManageUsers() {
+export default function ManagerUsers() {
   const [users, setUsers] = useState([]);
   const [message, setMessage] = useState("");
 
@@ -43,7 +43,7 @@ export default function ManageUsers() {
   };
 
   return (
-    <div>
+    <div >
       <h2 className="text-xl font-semibold">Kelola Pengguna</h2>
       {message && <p className="text-green-500">{message}</p>}
       <table className="w-full border-collapse border border-gray-200 mt-4">

@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function SubMenu({ subMenu, isVisible }) {
+export default function SubMenu({ subMenu, isVisible, onClick }) {
   return (
     <div
       className={`ml-6 mt-2 overflow-hidden transition-all duration-300 ease-in-out ${
@@ -10,12 +10,16 @@ export default function SubMenu({ subMenu, isVisible }) {
       <ul>
         {subMenu.map((item) => (
           <li key={item.name}>
-            <Link href={item.path} className="block py-2 px-4 hover:bg-blue-100">
+            <button
+              onClick={() => onClick(item.path)}
+              className="block w-full text-left py-2 px-4 hover:bg-blue-100"
+            >
               {item.name}
-            </Link>
+            </button>
           </li>
         ))}
       </ul>
     </div>
   );
 }
+
