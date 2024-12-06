@@ -2,7 +2,7 @@ import { FiLogOut } from "react-icons/fi"; // Paket react-icons untuk ikon logou
 
 export default function Header({ username, onLogout }) {
   return (
-    <header className="bg-white text-gray-800 p-4 shadow-lg flex items-center justify-between">
+    <header className="bg-blue-100 text-gray-800 p-4 shadow-lg flex items-center justify-between">
       {/* Judul Dashboard */}
       <h1 className="text-xl font-bold">Dashboard Admin</h1>
 

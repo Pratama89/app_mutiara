@@ -43,8 +43,8 @@ export default function ManagerUsers() {
   };
 
   return (
-    <div >
-      <h2 className="text-xl font-semibold">Kelola Pengguna</h2>
+    <div className="bg-white shadow p-4 rounded-lg">
+      <h2 className="text-xl font-semibold ">Kelola Pengguna</h2>
       {message && <p className="text-green-500">{message}</p>}
       <table className="w-full border-collapse border border-gray-200 mt-4">
         <thead>
