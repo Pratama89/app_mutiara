@@ -8,7 +8,6 @@ import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 export default function Menu() {
   const [activeMenus, setActiveMenus] = useState([]); // Menyimpan menu yang sedang aktif
 
-  // Fungsi untuk menampilkan/menyembunyikan submenu
   const handleMenuToggle = (menuName) => {
     setActiveMenus((prev) =>
       prev.includes(menuName)
@@ -23,28 +22,45 @@ export default function Menu() {
         {menuData.map((menu) => (
           <li key={menu.name} className="mb-2">
             {/* Menu utama */}
-            <div
-              className={`flex items-center justify-between px-3 py-2 rounded-md cursor-pointer ${
-                activeMenus.includes(menu.name)
-                  ? "bg-blue-600 text-white"
-                  : "hover:bg-blue-100 hover:text-blue-600"
-              }`}
-              onClick={() => handleMenuToggle(menu.name)}
-            >
-              <div className="flex items-center">
-                {menu.icon}
-                <span className="ml-2">{menu.name}</span>
+            {menu.path ? (
+              <Link href={menu.path}>
+                <div
+                  className={`flex items-center justify-between px-3 py-2 rounded-md cursor-pointer ${
+                    activeMenus.includes(menu.name)
+                      ? "bg-blue-600 text-white"
+                      : "hover:bg-blue-100 hover:text-blue-600"
+                  }`}
+                >
+                  <div className="flex items-center">
+                    {menu.icon}
+                    <span className="ml-2">{menu.name}</span>
+                  </div>
+                </div>
+              </Link>
+            ) : (
+              <div
+                className={`flex items-center justify-between px-3 py-2 rounded-md cursor-pointer ${
+                  activeMenus.includes(menu.name)
+                    ? "bg-blue-600 text-white"
+                    : "hover:bg-blue-100 hover:text-blue-600"
+                }`}
+                onClick={() => handleMenuToggle(menu.name)}
+              >
+                <div className="flex items-center">
+                  {menu.icon}
+                  <span className="ml-2">{menu.name}</span>
+                </div>
+                {menu.subMenu.length > 0 && (
+                  <span>
+                    {activeMenus.includes(menu.name) ? (
+                      <FiChevronUp />
+                    ) : (
+                      <FiChevronDown />
+                    )}
+                  </span>
+                )}
               </div>
-              {menu.subMenu.length > 0 && (
-                <span>
-                  {activeMenus.includes(menu.name) ? (
-                    <FiChevronUp />
-                  ) : (
-                    <FiChevronDown />
-                  )}
-                </span>
-              )}
-            </div>
+            )}
 
             {/* SubMenu */}
             {menu.subMenu.length > 0 && activeMenus.includes(menu.name) && (

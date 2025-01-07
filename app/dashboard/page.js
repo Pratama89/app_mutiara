@@ -2,22 +2,17 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Header from "../../components/header/page";
-import Menu from "../../components/menu/page";
-import Content from "../../components/content/page";
-import Image from "next/image";
 
 export default function Dashboard() {
-  const [isAuthenticated, setIsAuthenticated] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
-  const [activeContent, setActiveContent] = useState("/dashboard"); // Default ke dashboard
   const router = useRouter();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
 
     if (!token) {
-      router.push("/login"); // Jika token tidak ada, redirect ke halaman login
+      router.push("/login"); // Redirect ke login jika token tidak ada
     } else {
       fetch("/api/verify-token", {
         method: "POST",
@@ -30,14 +25,14 @@ export default function Dashboard() {
         .then((data) => {
           if (data.valid) {
             setIsAuthenticated(true);
-            setUser(data.user);
+            setUser(data.user); // Simpan data user ke state
           } else {
             localStorage.removeItem("token");
-            router.push("/login"); // Jika token tidak valid, redirect ke login
+            router.push("/login"); // Redirect ke login jika token tidak valid
           }
         })
-        .catch(() => {
-          console.error("Error verifying token");
+        .catch((error) => {
+          console.error("Error verifying token:", error);
           setIsAuthenticated(false);
         });
     }
@@ -48,15 +43,20 @@ export default function Dashboard() {
     router.push("/login"); // Logout dan redirect ke login
   };
 
-  
+  if (!isAuthenticated && !user) {
+    return <p>Loading...</p>; // Tampilkan loading saat menunggu verifikasi
+  }
 
   return (
-    <div className="min-h-screen flex flex-col">      
-        <Content
-          fullName={user?.full_name}
-          role={user?.role}
-          activeContent={activeContent}
-        />      
+    <div className="min-h-screen flex flex-col">
+      <main className="flex-1 bg-gray-100 p-4">
+        <div className="bg-white shadow p-6 rounded-lg">
+          <h2 className="text-2xl font-semibold mb-4">
+            Assalamualaikum, {user?.fullName || "Pengguna"}!
+          </h2>
+          <p>Selamat datang di halaman Dashboard.</p>
+        </div>
+      </main>
     </div>
   );
 }

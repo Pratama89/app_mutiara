@@ -18,23 +18,33 @@ export async function POST(req) {
     const user = await checkCredentials(identifier, password);
 
     if (user) {
-      // Buat token otentikasi dengan menyertakan role
+      // Format data pengguna sesuai dengan skema database
+      const formattedUser = {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        fullName: user.full_name, // Map dari 'full_name'
+        role: user.role,
+        profilePicture: user.profile_picture,
+      };
+
+      // Buat token otentikasi dengan menyertakan properti yang relevan
       const token = jwt.sign(
         {
-          userId: user.id,
-          username: user.username,
-          fullName: user.fullName,
-          role: user.role, // Tambahkan role di token
+          userId: formattedUser.id,
+          username: formattedUser.username,
+          fullName: formattedUser.fullName,
+          role: formattedUser.role,
         },
         process.env.SECRET_KEY,
-        { expiresIn: "1h" } // Token berlaku selama 1 jam
+        { expiresIn: "1h" }
       );
 
       // Kembalikan token dan data user
       return NextResponse.json({
         message: "Login berhasil",
         token,
-        user,
+        user: formattedUser,
       });
     } else {
       return NextResponse.json(

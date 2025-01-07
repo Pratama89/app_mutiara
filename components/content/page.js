@@ -2,18 +2,17 @@ import React from "react";
 
 export default function Content({ fullName, activeContent }) {
   const renderContent = () => {
-    // Pastikan hanya "/dashboard" yang akan ditampilkan
     if (activeContent === "/dashboard") {
       return (
         <div>
           <h2 className="text-2xl font-semibold mb-4">
             Assalamualaikum, {fullName || "Pengguna"}!
           </h2>
-          <p>Ini adalah halaman dashboard utama.</p>
+          <p>Ini adalah halaman dashboard utama ya.</p>
         </div>
       );
     }
-    return <p>Konten tidak ditemukan.</p>; // Jika tidak ada path yang sesuai
+    return <p>Konten tidak ditemukan.</p>;
   };
 
   return (

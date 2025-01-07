@@ -22,16 +22,26 @@ export async function POST(req) {
     // Verifikasi token
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
 
+
     // Pastikan user masih valid di database
     const result = await pool.query(
-      "SELECT id, username, full_name, role FROM users WHERE id = $1",
+      "SELECT id, username, full_name, role, profile_picture FROM users WHERE id = $1",
       [decoded.userId]
     );
 
     const user = result.rows[0];
     if (user) {
+      // Format data pengguna
+      const formattedUser = {
+        id: user.id,
+        username: user.username,
+        fullName: user.full_name, // Ubah 'full_name' menjadi 'fullName'
+        role: user.role,
+        profilePicture: user.profile_picture, // Sertakan gambar profil jika ada
+      };
+
       return new Response(
-        JSON.stringify({ valid: true, user }),
+        JSON.stringify({ valid: true, user: formattedUser }), // Kirim data yang sudah diformat
         { status: 200 }
       );
     } else {
